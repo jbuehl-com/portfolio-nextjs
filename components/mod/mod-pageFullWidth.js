@@ -1,10 +1,14 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react/rsc";
 
-const PageTwoColumns = ({ blok }) => {
+const PageTwoColumns = ({ blok, colType }) => {
   return (
     <>
       {blok.content.map((nestedBlok) => (
-        <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} />
+        <StoryblokComponent 
+        blok={nestedBlok} 
+        key={nestedBlok._uid} 
+        colType={colType}
+        />
       ))}
     </>
   );

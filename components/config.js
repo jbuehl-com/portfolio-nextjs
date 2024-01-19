@@ -30,7 +30,7 @@ const Config = ({ blok }) => {
     setMenuIsActive(!menuIsActive)
     gsap.set(navigationEl.current, { rotation: navItemsTotal.current * 25 / navItemsTotal.current * (activeSlugPosition - 1) });
   }
-  if (menuIsActive === false) {
+  if (menuIsActive !== false) {
     menuButtonText.current = 'Menü schließen'
     navMainClass.current = 'is-open'
     navButtonClass.current = 'is-active'
