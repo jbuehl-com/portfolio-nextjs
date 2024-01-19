@@ -12,9 +12,15 @@ import {
 export default function Page({ story }) {
   story = useStoryblokState(story);
 
-    let col = false
+    let col = {
+      accent: 'rgba(255, 94, 233, 1)',
+      type: '#000',
+      background: 'transparent',
+      logo: 'rgba(255, 94, 233, 1)',
+      nav: '#B3B3B3'
+    }
     console.log('story', story)
-    if (story.content) {
+    if (story.content && story.content.colAccent) {
       col = {
         accent: story.content.colAccent.color.length > 0 ? story.content.colAccent.color : 'rgba(255, 94, 233, 1)',
         type: story.content.colType.color.length > 0 ? story.content.colType.color : '#000',
