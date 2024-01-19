@@ -4,10 +4,26 @@ import {
   getStoryblokApi,
   StoryblokComponent,
 } from "@storyblok/react";
+import { useIsomorphicLayoutEffect } from '../helpers/isomorphicEffect';
+import {
+  animateCssVarCols
+} from '../components/animations';
 
 export default function Page({ story }) {
   story = useStoryblokState(story);
  
+  let col = {
+    accent: story.content.colAccent.color.length > 0  ? story.content.colAccent.color : 'rgba(255, 94, 233, 1)',
+    type: story.content.colType.color.length > 0 ? story.content.colType.color : '#000',
+    background: story.content.colBackground.color.length > 0 ? story.content.colBackground.color : 'transparent',
+  }
+  col.logo = story.content.colLogo.color.length > 0 ? story.content.colLogo.color : col.accent
+  col.nav = story.content.colNav.color.length > 0 ? story.content.colNav.color : '#B3B3B3'
+
+  useIsomorphicLayoutEffect(() => {
+    animateCssVarCols(col.background, col.logo, col.type, col.accent, col.nav);
+  }, [])
+
   return (
       <StoryblokComponent blok={story.content} />
   );

@@ -9,7 +9,7 @@ const MenuLink = ({ blok, number }) => {
 
     return (
 
-        <li className="nav-item">
+        <li className="nav-item" key={number}>
             <Link className={
                 currentRoute === "/" + blok.link.cached_url ? "is-active" : "not-active"
             } href={blok.link.cached_url} {...storyblokEditable(blok)}>

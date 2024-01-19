@@ -14,17 +14,12 @@ const Config = ({ blok }) => {
 
   let pageAllSlugs = [],
    router = useRouter(),
-   currentRoute = router.asPath,
-    activeSlug = currentRoute;
-  blok.header_menu.forEach(menuItem => {
-    // console.log("menuitem" + menuItem.link.cached_url)
-    // pageAllSlugs.push("/" + menuItem.link.cached_url)
-  })
-  console.log("pageAllSlugs: " + pageAllSlugs)
-  console.log("activeSlug: " + activeSlug)
+   currentRoute = router.asPath;
+
+
   // START: get the positions for the pagination
-  let activeSlugPosition = activeSlug ? pageAllSlugs.findIndex(o => o === activeSlug) + 1 : 1;
-  let navItemsTotal = useRef(pageAllSlugs.length)
+  let activeSlugPosition = useRef(0);
+  let navItemsTotal = useRef(blok.header_menu.length)
   // END: get the positions for the pagination
   // START: Click menu variables + conditional rendering 
   const [menuIsActive, setMenuIsActive] = React.useState(false)
@@ -125,7 +120,7 @@ const Config = ({ blok }) => {
       </button>
 
       <div id="pagination">
-        <div className="pgi-current">{activeSlugPosition}</div>
+        <div className="pgi-current">{activeSlugPosition.current}</div>
         <hr />
         <div className="pgi-total">{navItemsTotal.current}</div>
       </div>
@@ -133,7 +128,12 @@ const Config = ({ blok }) => {
       <nav ref={navigationEl} className={'nav-main ' + navMainClass.current}>
         <ul ref={menu}>
           {blok.header_menu.map((nestedBlok, index) => (
+            <>
               <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} />
+              { nestedBlok.link !== undefined && "/" + nestedBlok.link.cached_url === currentRoute ? 
+                <div className="nav-item-active-slug-number">{activeSlugPosition.current = index + 1}</div>
+              : null}
+            </>
           ))}
         </ul>
       </nav>
