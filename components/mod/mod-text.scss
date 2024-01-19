@@ -1,0 +1,111 @@
+@import "../../styles/_typo.sass";
+
+.textblock {
+  grid-area: contentText;
+
+  @include mobile {
+    overflow-y: auto;
+    /* Shadow covers */
+    background:
+      /* Shadow covers */
+      linear-gradient(var(--colorShadowOverlay) 30%, transparent),
+      linear-gradient(transparent, var(--colorShadowOverlay) 70%) 0 100%,
+
+      /* Shadows */
+      radial-gradient(farthest-side at 50% 0, var(--colorShadow), transparent),
+      radial-gradient(farthest-side at 50% 100%, var(--colorShadow), transparent) 0 100%;
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    padding-bottom: 20px;
+  }
+
+  >* {
+    height: 50%;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  >.textblock-headline {
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    box-sizing: border-box;
+    padding-bottom: 30px;
+
+    @include mobile {
+      overflow: visible;
+      display: block;
+      height: auto;
+      padding: 0;
+      padding-top: 10px;
+    }
+  }
+
+  >.textblock-text {
+    height: calc(50% - 110px);
+    margin-top: 11px;
+    overflow-y: auto;
+    background:
+      /* Shadow covers */
+      linear-gradient(var(--colorShadowOverlay) 30%, transparent),
+      linear-gradient(transparent, var(--colorShadowOverlay) 70%) 0 100%,
+
+      /* Shadows */
+      radial-gradient(farthest-side at 50% 0, var(--colorShadow), transparent),
+      radial-gradient(farthest-side at 50% 100%, var(--colorShadow), transparent) 0 100%;
+
+    background-repeat: no-repeat;
+    background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+    background-attachment: local, local, scroll, scroll;
+
+    a {
+      color: $col-brand;
+    }
+
+    @include mobile {
+      height: auto;
+      padding: 0;
+      background: none;
+    }
+  }
+}
+.is-invert {
+  .textblock-text {
+    background:
+      /* Shadow covers */
+      linear-gradient(black 30%, rgba(0, 0, 0, 0)),
+      linear-gradient(rgba(0, 0, 0, 0), black 70%) 0 100%,
+
+      /* Shadows */
+      radial-gradient(farthest-side at 50% 0, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)) 0 100%;
+      @include mobile {
+        background: none;
+        height: auto;
+        padding: 0;
+      }
+  }
+  .textblock {
+
+    @include mobile { 
+      background:
+      /* Shadow covers */
+      linear-gradient(black 30%, rgba(0, 0, 0, 0)),
+      linear-gradient(rgba(0, 0, 0, 0), black 70%) 0 100%,
+      
+      /* Shadows */
+      radial-gradient(farthest-side at 50% 0, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)),
+      radial-gradient(farthest-side at 50% 100%, rgba(255, 255, 255, .2), rgba(255, 255, 255, 0)) 0 100%;
+      background-repeat: no-repeat;
+      background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+      background-attachment: local, local, scroll, scroll;
+    }
+  }
+}

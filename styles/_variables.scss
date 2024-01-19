@@ -1,0 +1,9 @@
+@import "_variables.sass";
+
+html {
+  --colorBackground: #fff;
+  --colorShadow: rgba(0, 0, 0, .2);
+  --colorShadowTransparent: rgba(0, 0, 0, 0);
+  --colorShadowGradient: rgba(255,255,255,1.0);
+  --colorShadowGradientTransparent: rgba(255,255,255,0.0);
+}

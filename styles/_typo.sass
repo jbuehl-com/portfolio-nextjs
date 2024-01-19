@@ -1,0 +1,146 @@
+@import "_variables.scss"
+
+// check the font-import-problem again
+// preload fonts? https://www.gatsbyjs.com/docs/how-to/styling/using-local-fonts/
+@font-face 
+    font-family: "cera"
+    font-weight: 400
+    src: url("/fonts/cera/Regular/cerabasic-regular-webfont.woff") format("woff")
+@font-face 
+    font-family: "cera"
+    font-weight: 600
+    src: url("/fonts/cera/Bold/cerabasic-bold-webfont.woff") format("woff")
+@font-face 
+    font-family: "cera"
+    font-weight: 800
+    src: url("/fonts/cera/Black/cerabasic-black-webfont.woff") format("woff")
+
+// @font-face 
+//     font-family: "din-cond"
+//     font-weight: 400
+//     src: url("/fonts/urwdin/Condensed/Regular/URWDINCond-Regular.woff") format("woff")
+// @font-face 
+//     font-family: "din-cond"
+//     font-weight: 600
+//     src: url("/fonts/urwdin/Condensed/Bold/URWDINCond-Bold.woff") format("woff")
+@font-face 
+    font-family: "din-cond"
+    font-weight: 800
+    src: url("/fonts/urwdin/Condensed/Black/URWDINCond-Black.woff") format("woff")
+
+%textstyle-sans
+    font-family: "cera", sans-serif
+    -webkit-font-smoothing: auto
+    -moz-osx-font-smoothing: auto
+    font-weight: 400
+
+// copy, figcaption
+%textstyle-copy
+    @extend %textstyle-sans
+    font-size: 16px
+    line-height: 1.5
+    +mobile
+        font-size: 14px
+
+// copy in bold
+%textstyle-copy-bold
+    @extend %textstyle-copy
+    font-weight: 800
+
+// pagetitles, logo, pagination, navigation
+%textstyle-thesmallone
+    @extend %textstyle-sans
+    font-size: 14px
+    line-height: 1.5
+    font-weight: 800
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+// navigation
+%textstyle-nav
+    @extend %textstyle-sans
+    font-size: 16px
+    line-height: 1.5
+    font-weight: 800
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    +desktopxl
+        font-size: 18px
+
+// reflegend label
+%textstyle-label
+    font-family: "din-cond", sans-serif
+    color: $col-grey
+    font-weight: 800
+    font-size: 12px
+    text-transform: uppercase
+    letter-spacing: 1px
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+
+// vita time
+%textstyle-time
+    font-family: "din-cond", sans-serif
+    font-weight: 800
+    font-size: 16px
+    line-height: 100%
+    text-transform: uppercase
+    letter-spacing: 1px
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+    +mobile 
+        font-size: 12px
+
+    
+
+// reflegend value
+%textstyle-form
+    @extend %textstyle-sans
+    font-weight: 800
+    font-size: 15px
+    letter-spacing: 0
+
+// headline
+%textstyle-headline
+    @extend %textstyle-sans
+    font-size: 54px
+    margin: 0
+    padding: 0
+    font-weight: bold
+    +mobile
+        font-size: 38px
+
+%textstyle-headline-2nd
+    @extend %textstyle-headline
+    font-size: 28px
+    +mobile
+        font-size: 20px
+
+%textstyle-headline-3nd
+    @extend %textstyle-headline-2nd
+    font-size: 18px
+    +mobile
+        font-size: 16px
+
+body 
+    @extend %textstyle-sans
+
+p
+    @extend %textstyle-copy
+    max-width: 800px
+
+h1 
+    @extend %textstyle-headline
+
+strong
+    font-weight: 600
+
+.link-button
+    @extend %textstyle-label
+    display: inline-block
+    font-size: 20px
+    color: #fff
+    background: $col-brand
+    padding: 25px 30px 15px 30px
+    text-decoration: none
+    border-radius: 35px

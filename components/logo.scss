@@ -1,0 +1,131 @@
+@import "./../global-assets/css/_typo.sass";
+
+header {
+    position: absolute;
+    z-index: 100;
+    overflow: hidden;
+    align-self: center;
+    transition: ease left 0.5s;
+    left: 0;
+    display: flex;
+}
+
+%header-box {
+    display: block;
+    float: left;
+    min-width: 45px;
+    height: 45px;
+    z-index: 100;
+    line-height: 43px;
+    @extend %textstyle-thesmallone
+}
+
+#logo {
+    width: 45px;
+    background: $col-brand;
+    text-align: center;
+    border-radius: 50%;
+    @extend %header-box;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background ease 0.2s;
+    color: #fff;
+
+    a {
+        text-decoration: none;
+        color: var(--colorNavBtn);
+    }
+
+    span {
+        display: none;
+    }
+}
+
+.logo__content {
+    position: relative;
+
+    a {
+        @extend %header-box;
+        position: relative;
+        width: 400px;
+        overflow: hidden;
+        left: 0px;
+        white-space: nowrap;
+        display: none;
+        text-decoration: none;
+        text-overflow: ellipsis;
+
+        @include tablet {
+            width: calc(30vw);
+        }
+
+        @include mobile {
+            width: calc(100vw - 130px);
+        }
+    }
+
+    a.is-active {
+        display: block;
+    }
+}
+
+#___loader {
+    &:after {
+        background-color: $col-brand;
+        aspect-ratio: 1;
+        position: absolute;
+        content: " ";
+        border-radius: 100%;
+        z-index: -1;
+        width: 80px;
+        animation: loading 1s ease-in-out infinite;
+        opacity: 0.3;
+    }
+}
+
+#___loader.is-loaded {
+    animation: transitionLoading 0.5s ease-out forwards;
+    &:after {
+        background-color: #fff;
+        animation: transitionLoadingImage 0.5s ease-out forwards;
+    }
+}
+
+@keyframes loading {
+    100% {
+        width: 80px;
+    }
+    50% {
+        width: 150px;
+    }
+    0% {
+        width: 80px;
+    }
+}
+
+@keyframes transitionLoadingImage {
+    100% {
+        width: 150vw;
+        background-color: #fff;
+        opacity: 0;
+    }
+    50% {
+        width: 150vw;
+        background-color: #fff;
+    }
+    0% {
+        width: 10vw;
+        background-color: $col-brand;
+    }
+}
+@keyframes transitionLoading {
+    100% {
+        opacity: 0;
+    }
+    50% {
+        background-color: #fff;
+    }
+    0% {
+        background-color: #fff;
+    }
+}

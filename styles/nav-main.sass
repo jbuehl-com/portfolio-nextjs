@@ -1,0 +1,251 @@
+@import "_typo.sass"
+    
+#navigation
+    right: 0px
+    z-index: 100
+    top: 0
+    +mobile
+        position: absolute
+    a
+        text-decoration: none
+
+#nav-menu-button
+    z-index: 900
+    position: fixed
+    background: var(--colorNav)
+    cursor: pointer
+    right: 27px
+    top: calc(50vh - 8px)
+    top: calc((var(--vh, 1vh) * 50) - 8px)
+    border-radius: 50%
+    height: 17px
+    width: 17px
+    transition: transform ease-out 0.1s
+    border: 0px solid $col-brand
+    transform-origin: center center
+    transform: scale(1) 
+    +mobile
+        right: 15px
+    &.is-active
+        transform: scale(3) 
+        background: $col-brand
+        margin-top: 0
+        transition: all ease-out 0.1s
+    +desktop
+        &:hover
+            transform: scale(3) 
+            background: $col-brand
+            transition: all ease-out 0.1s
+    &.is-active
+        > .icon > span
+            background: #fff
+            &:nth-child(1)
+                transform: rotate(135deg)
+                grid-row: 2 / 2
+            &:nth-child(2)
+                opacity: 0
+                grid-row: 2 / 2
+            &:nth-child(3)
+                transform: rotate(-135deg)
+                grid-row: 2 / 2
+    &.is-invert, &.is-active.is-invert, &:hover.is-invert
+        background: #fff
+        border-color: #fff
+        > .icon > span
+            background: $col-brand
+    > .button-text
+        display: none
+    > .icon 
+        position: relative
+        width: 100%
+        height: 100%
+        transition: all ease-out 0.1s
+        display: grid
+        justify-content: center
+        align-content: center
+        flex-wrap: wrap
+        row-gap: 1px
+        grid-template-rows: 1px 1px 1px
+        grid-template-columns: 9px
+        > span
+            display: block
+            background: var(--colorNavBtn)
+            transition: all ease-out 0.1s
+            grid-column: 1 / 1
+            &:nth-child(1)
+                grid-row: 1 / 1
+            &:nth-child(2)
+                grid-row: 2 / 2
+            &:nth-child(3)             
+                grid-row: 3 / 3
+
+#nav-nextprev
+    position: fixed
+    width: 100vh
+    width: calc(var(--vh, 1vh) * 100)
+    height: 45px
+    right: 45px
+    z-index: 99
+    @extend %textstyle-thesmallone
+    transform: rotate(-90deg)
+    transform-origin: right top
+    +mobile
+        height: 30px
+        right: 35px
+    a 
+        @extend %transition-nav-hover
+        cursor: pointer
+        color: var(--colorNav)
+    .next-line
+        position: absolute
+        height: 2px
+        width: 50px
+        background: var(--colorNav)
+        left: -20px
+        top: 10px
+    .prev-line
+        position: absolute
+        height: 2px
+        width: 50px
+        background: var(--colorNav)
+        right: -20px
+        top: 10px
+    li 
+        position: relative
+        opacity: 0
+        top: 50px
+        list-style-type: none
+    .is-next
+        position: absolute
+        top: 0
+        left: 35px
+        opacity: 1
+    .is-prev
+        position: absolute
+        top: 0
+        right: 35px
+        opacity: 1
+
+
+#pagination
+    position: fixed
+    display: flex
+    flex-direction: column
+    justify-content: center
+    height: 100vh
+    height: calc(var(--vh, 1vh) * 100)
+    width: 70px
+    right: 0px
+    z-index: 99
+    text-align: center
+    @extend %textstyle-thesmallone
+    color: #000
+    color: var(--colorNav)
+    +mobile
+        width: 45px
+    > .pgi-current
+        padding-bottom: 15px
+    > hr 
+        height: 2px
+        border: none
+        background: var(--colorNav)
+        padding: 0
+        margin: 0 -15px 0 0
+    > .pgi-total
+        padding-top: 15px
+    
+nav li
+    list-style-type: none
+
+#navigation 
+    position: fixed
+
+.nav-main
+    position: fixed
+    top: calc( 50vh - 450px )
+    top: calc((var(--vh, 1vh) * 50) - 450px )
+    right: calc( 45px - 460px ) 
+    width: 900px
+    height: 900px
+    z-index: 800
+    background: rgba(255, 94, 232, 0.7)
+    border-radius: 50%
+    // display: none
+    // noch eigenen rotation-cursor einsetzen
+    cursor: progress
+    display: none
+    +mobile
+        right: calc( 35px - 472px )
+    &.is-open
+        display: block
+    > ul
+        margin: 0px
+        padding: 0px
+        > li
+            position: absolute
+            display: flex
+            top: 50%
+            left: calc( 50% - 450px )
+            height: 20px
+            text-align: right
+            width: calc( 450px - 20px )
+            transform-origin: right top
+            align-items: center
+            justify-content: flex-end
+            color: #000
+            padding-right: 20px
+            &:has(> a.is-active)
+                z-index: -50
+            > a
+                display: inline
+                position: relative
+                transition: background ease 0.2s
+                text-align: left
+                color: #fff
+                border-radius: 50px
+                padding: 20px 50px 20px 20px
+                margin-top: - 20px
+                margin-right: 20px
+                background: transparent
+                transition: background ease 0.2s
+                z-index: 1000
+                @extend %textstyle-nav
+                &.is-active
+                    transition: background ease 0.2s
+                    z-index: -50
+
+                    > .nav-item-number
+                        background: $col-brand
+                > .nav-item-number
+                    position: absolute
+                    top: 8px
+                    right: 10px    
+                    padding: 10px 20px
+                    border-radius: 100%
+                    box-sizing: border-box
+                    margin-left: -5px
+                    aspect-ratio: 1
+                    z-index: -1
+            &:hover
+                > a
+                    transition: background ease 0.2s
+                    background: rgba(255,94,232,0.5)
+            &.nav-item-contact
+                &:hover
+                    > a
+                        background: none
+                > a 
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    flex-grow: 0
+                    padding: 0px
+                    width: 40px
+                    height: 40px
+                    margin: 0px 5px 0px 10px
+                    border-radius: 50%
+                    &:last-child
+                        margin-right: 100px
+                    &:hover
+                        background: $col-brand
+
