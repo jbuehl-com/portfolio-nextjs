@@ -17,7 +17,8 @@ const Config = ({ blok }) => {
    currentRoute = router.asPath,
     activeSlug = currentRoute;
   blok.header_menu.forEach(menuItem => {
-    pageAllSlugs.push("/" + menuItem.link.cached_url)
+    // console.log("menuitem" + menuItem.link.cached_url)
+    // pageAllSlugs.push("/" + menuItem.link.cached_url)
   })
   console.log("pageAllSlugs: " + pageAllSlugs)
   console.log("activeSlug: " + activeSlug)

@@ -16,7 +16,7 @@ export async function getStaticProps() {
   let slug = "home";
  
   let sbParams = {
-    version: "draft", // or 'published'
+    version: process.env.SB_DATA_VERSION,
     resolve_links: "url",
   };
  
