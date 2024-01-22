@@ -49,6 +49,10 @@ export async function getStaticProps({ params }) {
   // path for the config slug (in every root a config is needed)
   let configSlug = slug.split('/')[0] + '/config'
 
+
+  console.log('slug', slug)
+  console.log('configSlug', configSlug)
+
   let sbParams = {
     version: process.env.SB_DATA_VERSION,
     resolve_links: "url",
@@ -56,8 +60,9 @@ export async function getStaticProps({ params }) {
 
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  let { data: config } = await storyblokApi.get('cdn/stories/' + configSlug);
-
+  console.log('data ' + JSON.stringify(data))
+  console.log('completeConfigSlug  ' + 'cdn/stories/' + configSlug)
+  let { data: config } = await storyblokApi.get('cdn/stories/' + configSlug, sbParams);
   return {
     props: {
       story: data ? data.story : false,

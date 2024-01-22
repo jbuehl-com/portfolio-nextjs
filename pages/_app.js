@@ -58,7 +58,7 @@ export default function App({ Component, pageProps }) {
       // if no pageprops defined, we place a placeholder
       pageProps = {
         story: {
-          full_slug: 'no-pagep-props-slug'
+          full_slug: 'no-page-props-slug'
         },
         config: {
           name: 'Config',

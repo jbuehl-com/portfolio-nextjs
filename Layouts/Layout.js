@@ -87,6 +87,9 @@ const Layout = ({ children, pageProps }) => {
 
 
   }, [])
+
+
+  console.log('pageProps', pageProps)
   return (
     <>
       <Config blok={pageProps.config.content} />
