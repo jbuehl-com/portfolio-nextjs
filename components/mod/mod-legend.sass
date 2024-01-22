@@ -1,0 +1,29 @@
+@import "./../../styles/_typo.sass"
+
+.mod-reflegend
+    position: absolute
+    grid-area: contentText
+    width: 100%
+    max-width: 100%
+    z-index: 100
+    bottom: 0
+    display: flex
+    justify-content: space-between
+    @extend %textstyle-label
+    gap: 20px 20px
+    +mobile
+        display: none
+    .m-value
+        @extend %textstyle-form
+        +mobile
+            display: none
+        // white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+        a 
+            color: #fff
+            &:hover
+                text-decoration: underline
+
+main.is-invert > .mod-reflegend
+    color: #fff

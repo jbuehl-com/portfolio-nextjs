@@ -19,7 +19,6 @@ export default function Page({ story }) {
       logo: 'rgba(255, 94, 233, 1)',
       nav: '#B3B3B3'
     }
-    console.log('story', story)
     if (story.content && story.content.colAccent) {
       col = {
         accent: story.content.colAccent.color.length > 0 ? story.content.colAccent.color : 'rgba(255, 94, 233, 1)',
@@ -47,6 +46,8 @@ export default function Page({ story }) {
 
 export async function getStaticProps({ params }) {
   let slug = params.slug ? params.slug.join("/") : "home";
+  // path for the config slug (in every root a config is needed)
+  let configSlug = slug.split('/')[0] + '/config'
 
   let sbParams = {
     version: process.env.SB_DATA_VERSION,
@@ -55,7 +56,7 @@ export async function getStaticProps({ params }) {
 
   const storyblokApi = getStoryblokApi();
   let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  let { data: config } = await storyblokApi.get('cdn/stories/config');
+  let { data: config } = await storyblokApi.get('cdn/stories/' + configSlug);
 
   return {
     props: {

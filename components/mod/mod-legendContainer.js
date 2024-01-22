@@ -1,7 +1,5 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react/rsc";
 
-// import './legend.sass'
-
 const Legend = ({ blok }) => {
   return (
     <section className="mod-reflegend" {...storyblokEditable(blok)} key={blok._uid}>
