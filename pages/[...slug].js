@@ -49,25 +49,19 @@ export async function getStaticProps({ params }) {
   // path for the config slug (in every root a config is needed)
   let configSlug = slug.split('/')[0] + '/config'
 
-
-  console.log('slug', slug)
-  console.log('configSlug', configSlug)
-
   let sbParams = {
     version: process.env.SB_DATA_VERSION,
     resolve_links: "url",
   };
 
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
-  console.log('data ' + JSON.stringify(data))
-  console.log('completeConfigSlug  ' + 'cdn/stories/' + configSlug)
-  let { data: config } = await storyblokApi.get('cdn/stories/' + configSlug, sbParams);
+  let pages = await storyblokApi.get(`cdn/stories/${slug}`, sbParams);
+  let config  = await storyblokApi.get('cdn/stories/' + configSlug, sbParams);
   return {
     props: {
-      story: data ? data.story : false,
-      key: data ? data.story.id : false,
-      config: config ? config.story : false,
+      story: pages.data ? pages.data.story : false,
+      key: pages.data ? pages.data.story.id : false,
+      config: config.data ? config.data.story : false,
     },
     revalidate: 10,
   };
@@ -75,17 +69,22 @@ export async function getStaticProps({ params }) {
 
 export async function getStaticPaths() {
   const storyblokApi = getStoryblokApi();
-  let { data } = await storyblokApi.get("cdn/links/", {
+  let links = await storyblokApi.get("cdn/links/", {
     version: 'draft'
   });
+  console.log('data', links.data)
 
   let paths = [];
-  Object.keys(data.links).forEach((linkKey) => {
-    if (data.links[linkKey].is_folder || data.links[linkKey].slug === "home") {
+  Object.keys(links.data.links).forEach((linkKey) => {
+    if (links.data.links[linkKey].is_folder || links.data.links[linkKey].slug === "home") {
       return;
     }
 
-    const slug = data.links[linkKey].slug;
+    if (links.data.links[linkKey].name === 'Config') {
+      return;
+    }
+
+    const slug = links.data.links[linkKey].slug;
     let splittedSlug = slug.split("/");
 
     paths.push({ params: { slug: splittedSlug } });

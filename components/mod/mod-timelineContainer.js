@@ -20,7 +20,7 @@ const TimelineContainer = ({ blok }) => {
     let vitaElements = vita.current.querySelectorAll('.el-vita');
     vitaRightColumn.current = vitaElements[vitaElements.length - 1].getBoundingClientRect().left - vita.current.getBoundingClientRect().left;
 
-    console.log('vita height current : ' + vitaHeight.current);
+    // console.log('vita height current : ' + vitaHeight.current);
 
     animateStaggerEntry('.el-vita', 100)
 

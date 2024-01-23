@@ -103,9 +103,7 @@ export const animateFromToAttr = (el, attrFrom, attrTo) => {
 export const animateMotionBar = (el, mainContainer, vpWidth, vpHeight, initialMotionBarTop, timeout, headlineX, headlineWidth) => {
   const durationPos1 = 0.4, 
     durationPos2 = 0.6;
-    console.log('the classlist is ' + mainContainer.classList)
   if (mainContainer == null) {
-    console.log('the classlist is null')
   } else if (mainContainer.classList.contains('m-pd-mobile')) {
     let mbTL = gsap.timeline();
     mbTL.to(el, {

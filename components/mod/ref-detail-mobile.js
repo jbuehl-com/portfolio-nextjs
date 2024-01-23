@@ -1,9 +1,6 @@
 import React from "react";
-import './ref-detail-mobile.scss'
 import MediaElement from "./el-media";
-import {
-  storyblokEditable
-} from "gatsby-source-storyblok";
+import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 
 const RefDetailMobile = ({ blok }) => {
   return (

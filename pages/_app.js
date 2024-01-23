@@ -11,18 +11,23 @@ import LegendElement from "./../components/mod/mod-legendElement"
 import TimelineContainer from "./../components/mod/mod-timelineContainer"
 import TimelineElement from "./../components/mod/mod-timelineElement"
 import RefDesktopMobile from "./../components/mod/ref-desktop-mobile"
+import RefDetailMobile from "./../components/mod/ref-detail-mobile"
 
 
 import Config from "./../components/config"
 import HeaderMenu from "./../components/nav-headerMenu"
 import MenuLink from "./../components/nav-menuLink"
 import Layout from '../Layouts/Layout';
+
 import '../styles/layout.scss'
 import '../styles/nav-main.sass'
+import '../components/logo.scss'
 import '../components/mod/mod-text.scss'
 import '../components/mod/mod-timeline.scss'
 import '../components/mod/mod-legend.sass'
 import '../components/mod/ref-desktop-mobile.sass'
+import '../components/mod/ref-detail-mobile.scss'
+import '../components/mod/mod-asset.scss'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -40,6 +45,7 @@ const components = {
   menuLink: MenuLink,
   "header_menu": HeaderMenu,
   refDesktopMobile: RefDesktopMobile,
+  refDetailMobile: RefDetailMobile,
 };
 /** 2. Initialize it as usual */
 storyblokInit({

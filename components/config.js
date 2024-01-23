@@ -5,21 +5,24 @@ import { gsap } from 'gsap';
 import { Draggable } from "gsap/dist/Draggable";
 import { InertiaPlugin } from '../helpers/gsap/InertiaPlugin';
 import { useIsomorphicLayoutEffect } from '../helpers/isomorphicEffect';
-import { useRouter } from 'next/router';
 
-
-const Config = ({ blok }) => {
+const Config = ({ configContent, pageProps }) => {
 
   gsap.registerPlugin(Draggable, InertiaPlugin);
 
-  let pageAllSlugs = [],
-   router = useRouter(),
-   currentRoute = router.asPath;
-
-
   // START: get the positions for the pagination
-  let activeSlugPosition = useRef(0);
-  let navItemsTotal = useRef(blok.header_menu.length)
+  let activeSlugPosition = useRef(0),
+    navItemsTotal = useRef(0);
+    
+  if (configContent.header_menu) {
+    navItemsTotal.current = configContent.header_menu.length
+  }
+  if (pageProps && configContent.header_menu && configContent.header_menu[0].link) {
+    configContent.header_menu.forEach((el, i) => {
+      pageProps.story.full_slug === el.link.cached_url ? 
+      activeSlugPosition.current = i + 1 : false
+    })
+  }
   // END: get the positions for the pagination
   // START: Click menu variables + conditional rendering 
   const [menuIsActive, setMenuIsActive] = React.useState(false)
@@ -30,6 +33,7 @@ const Config = ({ blok }) => {
     setMenuIsActive(!menuIsActive)
     gsap.set(navigationEl.current, { rotation: navItemsTotal.current * 25 / navItemsTotal.current * (activeSlugPosition - 1) });
   }
+
   if (menuIsActive !== false) {
     menuButtonText.current = 'Menü schließen'
     navMainClass.current = 'is-open'
@@ -45,12 +49,10 @@ const Config = ({ blok }) => {
 
   let navigationEl = useRef(null),
     menu = useRef(null),
-    navNextPrev = useRef(null),
-    pageActive = useState(0),
-    pageNext = useState(0),
     pageNextPath = useState(0),
-    pagePrev = useState(0),
     pagePrevPath = useState(0);
+
+
 
   useIsomorphicLayoutEffect(() => {
     const navItems = gsap.utils.toArray(".nav-main .nav-item");
@@ -66,49 +68,19 @@ const Config = ({ blok }) => {
       allowEventDefault: true,
     });
 
+  //  function navKeypress(e) {
+  //     if (e.keyCode === 40 || e.keyCode === 39) {
+  //       navigate(pageNextPath.current);
+  //     } else if (e.keyCode === 37 || e.keyCode === 38) {
+  //       navigate(pagePrevPath.current);
+  //     }
+  //   }
+    // document.addEventListener('keydown', navKeypress, false)
 
-    // // get the next and previous pages
-    // pageActive = menu.current.querySelector('.nav-item .is-active');
-    // if (pageActive.current !== null) {
-
-    //   if (navNextPrev.current !== null) {
-    //     navNextPrev.current.querySelector('.is-next').classList.remove('is-next')
-    //   }
-    //   if (navNextPrev.current.querySelector('.is-prev') !== null) {
-    //     navNextPrev.current.querySelector('.is-prev').classList.remove('is-prev')
-    //   }
-    //   if (pageActive.current.parentNode.nextSibling === null) {
-    //     pageNext.current = navNextPrev.current.querySelector('.nav-item').childNodes[0]
-    //     navNextPrev.current.querySelector('.nav-item').classList.add('is-next')
-    //   } else {
-    //     pageNext.current = pageActive.current.parentNode.nextSibling.childNodes[0]
-    //     pageActive.current.parentNode.nextSibling.classList.add('is-next')
-    //   }
-    //   pageNextPath.current = pageNext.current.getAttribute("href");
-
-    //   if (pageActive.current.parentNode.previousSibling === null) {
-    //     pagePrev.current = navNextPrev.current.getElementsByClassName('nav-item')[navItemsTotal.current - 1].childNodes[0];
-    //     navNextPrev.current.getElementsByClassName('nav-item')[navItemsTotal.current - 1].classList.add('is-prev')
-    //   } else {
-    //     pagePrev.current = pageActive.current.parentNode.previousSibling.childNodes[0];
-    //     pageActive.current.parentNode.previousSibling.classList.add('is-prev')
-    //   }
-    //   pagePrevPath.current = pagePrev.current.getAttribute("href");
-    // }
-
-    function navKeypress(e) {
-      if (e.keyCode === 40 || e.keyCode === 39) {
-        navigate(pageNextPath.current);
-      } else if (e.keyCode === 37 || e.keyCode === 38) {
-        navigate(pagePrevPath.current);
-      }
-    }
-    document.addEventListener('keydown', navKeypress, false)
-
-  }, [pageActive, pageNext, pagePrev, pageNextPath, pagePrevPath]); // <- empty dependency Array so it doesn't re-run on every render
+  }, [pageNextPath, pagePrevPath]); // <- empty dependency Array so it doesn't re-run on every render
 
   return (
-    <div id="navigation" {...storyblokEditable(blok)} key={blok._uid}>
+    <div id="navigation" {...storyblokEditable(configContent)}>
 
       <button aria-label={menuButtonText.current} id="nav-menu-button" className={navButtonClass.current} onClick={handleClickMenu}>
         <div className="icon">
@@ -119,30 +91,54 @@ const Config = ({ blok }) => {
         <div className="button-text">{menuButtonText.current}</div>
       </button>
 
-      <div id="pagination">
-        <div className="pgi-current">{activeSlugPosition.current}</div>
-        <hr />
-        <div className="pgi-total">{navItemsTotal.current}</div>
-      </div>
-
       <nav ref={navigationEl} className={'nav-main ' + navMainClass.current}>
+      {/* {console.log("configContent.header_menu " + JSON.stringify(configContent.header_menu))} */}
+
         <ul ref={menu}>
-          {blok.header_menu.map((nestedBlok, index) => (
+          {configContent.header_menu.map((nestedBlok, index) => (
             <>
-              <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} />
-              { nestedBlok.link !== undefined && "/" + nestedBlok.link.cached_url === currentRoute ? 
-                <div className="nav-item-active-slug-number">{activeSlugPosition.current = index + 1}</div>
-              : null}
+              {/* link */}
+              {/* theoretisch kann ich via classe auch hier schon die active setzen und in menulink auf router verzichten */}
+              <StoryblokComponent
+                blok={nestedBlok}
+                key={nestedBlok._uid}
+                number={index}
+              />
             </>
           ))}
         </ul>
       </nav>
 
+      <div id="pagination">
+        <div className="pgi-current">{activeSlugPosition.current}</div>
+        <hr />
+        <div className="pgi-total">{navItemsTotal.current}</div>
+      </div>
       <div id="nav-nextprev">
-        <ul ref={navNextPrev}>
+        <ul>
+          {configContent.header_menu.map((nestedBlok, index) => (
+            <>
+            {/* the first one */}
+            { index === 0 && activeSlugPosition.current === 1 ?
+            <StoryblokComponent blok={configContent.header_menu[configContent.header_menu.length - 1]} key={configContent.header_menu[configContent.header_menu.length-1]._uid} number={configContent.header_menu.length-1} className={"is-prev"} />
+            : false}       
+            {/* all the others */}
+            { index === activeSlugPosition.current -2 ? 
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-prev"} />
+            : false}
+            { index === activeSlugPosition.current -1 ? 
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-active"} />
+            : false}
+            { index === activeSlugPosition.current ?
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-next"} />
+            : false}            
+            {/* and the last one */}
+            { index === configContent.header_menu.length - 1 && activeSlugPosition.current === configContent.header_menu.length  ?
+            <StoryblokComponent blok={configContent.header_menu[0]} key={configContent.header_menu[0]._uid} number={0} className={"is-next"} />
+            : false}            
+            </>
 
-          {blok.header_menu.map((nestedBlok, index) => (
-              <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} />
+
           ))}
 
         </ul>

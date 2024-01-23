@@ -1,6 +1,7 @@
 import { TransitionProvider } from '../context/TransitionContext';
 import TransitionComponent from '../components/Transition';
 import Config from "./../components/config"
+import Logo from "./../components/logo"
 import PropTypes from 'prop-types'
 import { useRef } from 'react';
 import { useIsomorphicLayoutEffect } from '../helpers/isomorphicEffect';
@@ -88,11 +89,12 @@ const Layout = ({ children, pageProps }) => {
 
   }, [])
 
-
-  console.log('pageProps', pageProps)
   return (
     <>
-      <Config blok={pageProps.config.content} />
+      <Logo ref={logoEl}
+      // menuItems={data.allStoryblokEntry.nodes} 
+      />
+      <Config configContent={pageProps.config.content} pageProps={pageProps} />
       <TransitionProvider>
         <TransitionComponent pageProps={pageProps}>
           <main>
