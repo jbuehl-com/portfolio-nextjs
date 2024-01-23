@@ -1,4 +1,5 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react/rsc";
+import { Fragment } from 'react';
 
 const PageTwoColumns = ({ blok, color }) => {
   return (

@@ -1,5 +1,6 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react";
 import React from 'react'
+import { Fragment } from 'react';
 import { useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Draggable } from "gsap/dist/Draggable";
@@ -31,7 +32,7 @@ const Config = ({ configContent, pageProps }) => {
     navButtonClass = useRef('is-not-active')
   const handleClickMenu = () => {
     setMenuIsActive(!menuIsActive)
-    gsap.set(navigationEl.current, { rotation: navItemsTotal.current * 25 / navItemsTotal.current * (activeSlugPosition - 1) });
+    // gsap.set(navigationEl.current, { rotation: navItemsTotal.current * 25 / navItemsTotal.current * (activeSlugPosition - 1) });
   }
 
   if (menuIsActive !== false) {
@@ -60,7 +61,8 @@ const Config = ({ configContent, pageProps }) => {
       gsap.set(item, { rotation: - navItemsTotal.current * 25 / navItemsTotal.current * i });
     })
 
-    Draggable.create(navigationEl.current, {
+    // gsap.to(".nav-main", {rotation: 1})
+    Draggable.create((".nav-main"), {
       type: "rotation",
       allowNativeTouchScrolling: false,
       inertia: true,
@@ -77,7 +79,7 @@ const Config = ({ configContent, pageProps }) => {
   //   }
     // document.addEventListener('keydown', navKeypress, false)
 
-  }, [pageNextPath, pagePrevPath]); // <- empty dependency Array so it doesn't re-run on every render
+  }, [pageNextPath, pagePrevPath]); 
 
   return (
     <div id="navigation" {...storyblokEditable(configContent)}>
@@ -94,17 +96,18 @@ const Config = ({ configContent, pageProps }) => {
       <nav ref={navigationEl} className={'nav-main ' + navMainClass.current}>
       {/* {console.log("configContent.header_menu " + JSON.stringify(configContent.header_menu))} */}
 
-        <ul ref={menu}>
+        <ul ref={menu} key="123">
           {configContent.header_menu.map((nestedBlok, index) => (
-            <>
+            <Fragment key={"mainnav" + nestedBlok._uid}>
               {/* link */}
               {/* theoretisch kann ich via classe auch hier schon die active setzen und in menulink auf router verzichten */}
               <StoryblokComponent
                 blok={nestedBlok}
-                key={nestedBlok._uid}
+                key={"mainnav" + nestedBlok._uid}
+                subKey={"mainnav" + nestedBlok._uid}
                 number={index}
               />
-            </>
+            </Fragment>
           ))}
         </ul>
       </nav>
@@ -117,28 +120,26 @@ const Config = ({ configContent, pageProps }) => {
       <div id="nav-nextprev">
         <ul>
           {configContent.header_menu.map((nestedBlok, index) => (
-            <>
+            <Fragment key={nestedBlok._uid}>
             {/* the first one */}
             { index === 0 && activeSlugPosition.current === 1 ?
-            <StoryblokComponent blok={configContent.header_menu[configContent.header_menu.length - 1]} key={configContent.header_menu[configContent.header_menu.length-1]._uid} number={configContent.header_menu.length-1} className={"is-prev"} />
+            <StoryblokComponent blok={configContent.header_menu[configContent.header_menu.length - 1]} key={configContent.header_menu[configContent.header_menu.length-1]._uid} className={"is-prev"} />
             : false}       
             {/* all the others */}
             { index === activeSlugPosition.current -2 ? 
-            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-prev"} />
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} className={"is-prev"} />
             : false}
             { index === activeSlugPosition.current -1 ? 
-            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-active"} />
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} className={"is-active"} />
             : false}
             { index === activeSlugPosition.current ?
-            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} number={index} className={"is-next"} />
+            <StoryblokComponent blok={nestedBlok} key={nestedBlok._uid} className={"is-next"} />
             : false}            
             {/* and the last one */}
             { index === configContent.header_menu.length - 1 && activeSlugPosition.current === configContent.header_menu.length  ?
-            <StoryblokComponent blok={configContent.header_menu[0]} key={configContent.header_menu[0]._uid} number={0} className={"is-next"} />
+            <StoryblokComponent blok={configContent.header_menu[0]} key={configContent.header_menu[0]._uid} className={"is-next"} />
             : false}            
-            </>
-
-
+            </Fragment>
           ))}
 
         </ul>

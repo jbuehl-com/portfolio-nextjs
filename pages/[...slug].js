@@ -72,7 +72,6 @@ export async function getStaticPaths() {
   let links = await storyblokApi.get("cdn/links/", {
     version: 'draft'
   });
-  console.log('data', links.data)
 
   let paths = [];
   Object.keys(links.data.links).forEach((linkKey) => {
@@ -80,6 +79,7 @@ export async function getStaticPaths() {
       return;
     }
 
+    // exclude configs
     if (links.data.links[linkKey].name === 'Config') {
       return;
     }
