@@ -18,7 +18,7 @@ const MediaElement = ({srcImage, srcVideo, alt}) => {
     return (
       <picture> 
         <source srcSet={srcImage} type="image/webp" />
-        <img src={srcImage} alt="" />
+        <img src={srcImage} alt={alt} />
       </picture>
     )
   }

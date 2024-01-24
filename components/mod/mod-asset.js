@@ -7,9 +7,7 @@ import MediaElement from "./el-media";
 const ModAsset = ({ blok }) => {
   return (
     <div {...storyblokEditable(blok)} key={blok._uid} className="visual image">
-        <MediaElement srcImage={blok.asset.filename} />
-        {JSON.stringify(blok.asset.filename)}
-        !!!
+        <MediaElement srcImage={blok.asset.filename} alt={blok.alt} />
     </div>
   );
 };
