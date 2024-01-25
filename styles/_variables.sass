@@ -27,7 +27,7 @@ $desktop-xl-width: 1800px
 $desktop-xxl-width: 2100px
 
 =desktopOnly
-    @media (max-width: #{$desktop-width}), (max-height: #{$desktop-height})
+    @media (min-width: #{$desktop-width}) and (min-height: #{$desktop-height})
         @content
 
 =desktopxxl

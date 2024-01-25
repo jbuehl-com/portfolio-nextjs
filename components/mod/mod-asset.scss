@@ -18,6 +18,9 @@
     box-sizing: border-box;
     height: auto;
 
+    @include desktopOnly {
+      max-width: 70%;
+    }
     @include mobile {
       margin-top: 20px;
       max-width: 80%;
