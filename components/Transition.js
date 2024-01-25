@@ -104,9 +104,11 @@ const TransitionComponent = ({
         if (visual.length > 0) {
           animateVisualOut(visual);
         }
-        gsap.to('.textblock-text', {
+        gsap.to('.textblock-text, .c-item', {
           opacity: 0,
           y: 30,
+          ease: 'Expo.easeIn',
+          duration: 0.3,
         })
         // gsap.to(['.is-prev', '.prev-line'], {
         //   opacity: 0,

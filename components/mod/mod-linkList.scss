@@ -1,0 +1,61 @@
+@import "../../styles/_typo.sass";
+
+.mod-linklist {
+  position: absolute;
+  grid-area: contentText;
+  top: calc(50% + 40px);
+  height: calc(50% - 20px);
+
+  @include mobile {
+    grid-area: contentVisual;
+    top: 20px;
+  }
+  .visual {
+    @include mobile {
+      display: none;
+    }
+  }
+  >ul {
+    margin: 0;
+    padding: 0;
+
+    >li {
+      list-style-type: none;
+      margin: 0 0 10px 0;
+      padding: 0;
+
+      a {
+        display: flex;
+        color: $col-brand;
+        text-decoration: none;
+
+        >.i-image {
+          background: $col-brand;
+          width: 60px;
+          height: 60px;
+          display: inline-block;
+          border-radius: 100%;
+          flex-shrink: 0;
+
+          >* {
+            position: absolute;
+            margin: auto auto;
+            transform: scale(0.5);
+          }
+        }
+
+        >.i-value {
+          margin-left: 10px;
+          align-self: center;
+          color: black;
+        }
+      }
+    }
+  }
+}
+
+.text-left .image {
+ @include mobile {
+   display: none;
+ }
+}
