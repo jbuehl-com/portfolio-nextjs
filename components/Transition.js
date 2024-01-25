@@ -44,8 +44,8 @@ const TransitionComponent = ({
             vpHeight,
             initialMotionBarTop,
             "0",
-            headline.getBoundingClientRect().x,
-            headline.childNodes[0].clientWidth
+            headline ? headline.getBoundingClientRect().x : "0",
+            headline ? headline.childNodes[0].clientWidth : "10"
     )
           if (headline !== null) {
             gsap.fromTo(headline.childNodes[0], {

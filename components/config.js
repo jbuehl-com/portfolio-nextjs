@@ -96,7 +96,7 @@ const Config = ({ configContent, pageProps }) => {
       <nav ref={navigationEl} className={'nav-main ' + navMainClass.current}>
       {/* {console.log("configContent.header_menu " + JSON.stringify(configContent.header_menu))} */}
 
-        <ul ref={menu} key="123">
+        <ul ref={menu}>
           {configContent.header_menu.map((nestedBlok, index) => (
             <Fragment key={"mainnav" + nestedBlok._uid}>
               {/* link */}
@@ -105,7 +105,7 @@ const Config = ({ configContent, pageProps }) => {
                 blok={nestedBlok}
                 key={"mainnav" + nestedBlok._uid}
                 subKey={"mainnav" + nestedBlok._uid}
-                number={index}
+                number={index ? index + 1 : 1}
               />
             </Fragment>
           ))}

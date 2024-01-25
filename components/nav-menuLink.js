@@ -24,7 +24,7 @@ const MenuLink = ({ blok, number, className, subKey }) => {
                 <div 
                 key={"number" + subKey}
                 className="nav-item-number">
-                    {number + 1}
+                    {number}
                 </div>
                 : false}
             </Link>
