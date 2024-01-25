@@ -8,7 +8,6 @@ module.exports = {
         protocol: 'https',
         hostname: 'a.storyblok.com',
         port: '',
-        pathname: '',
       },
     ],
   },

@@ -3,8 +3,12 @@ import Image from "next/image";
 
 const MediaElement = ({srcImage, srcVideo, alt}) => {
 
-  const width = +srcImage.split("/")[5].split("x")[0];
-  const height = +srcImage.split("/")[5].split("x")[1];
+  // if srcImage is defined set the width and height via split
+  let width = 10, 
+   height = 10
+  srcImage ? width = srcImage.split("/")[5].split("x")[0] : false;
+  srcImage ? height = srcImage.split("/")[5].split("x")[1] : false;
+
 
   if (srcVideo) {
     return (
@@ -35,7 +39,7 @@ const MediaElement = ({srcImage, srcVideo, alt}) => {
         width={width}
         height={height}
         priority= "true"
-        sizes="(max-width: 640px) 100vw, 1200px"
+        sizes="(max-width: 420px) 375px, (max-width: 640px) 100vw, 1200px, "
       />
 
       </picture>
