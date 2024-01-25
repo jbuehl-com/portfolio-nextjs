@@ -96,7 +96,14 @@ const Layout = ({ children, pageProps }) => {
       />
       <Config configContent={pageProps.config.content} pageProps={pageProps} />
       <TransitionProvider>
-        <TransitionComponent pageProps={pageProps} logo={logoEl.current} motionBar={motionBar.current}>
+        <TransitionComponent 
+        pageProps={pageProps} 
+        logo={logoEl.current} 
+        motionBar={motionBar.current}
+        vpWidth={vpWidth.current}
+        vpHeight={vpHeight.current}
+        initialMotionBarTop={initialMotionBarTop.current}
+        >
           <main>
             {children}
           </main>
