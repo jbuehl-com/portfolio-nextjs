@@ -1,4 +1,4 @@
 [[headers]]
-  for = "/*"
+  for = "/portfolio/*"
   [headers.values]
-    Basic-Auth = "someuser:somepassword anotheruser:anotherpassword"
+    Basic-Auth = "jb:$apr1$lnm0tyx4$26i9UNPp8Dz8A3xuxDrnJ1"
