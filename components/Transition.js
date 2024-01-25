@@ -9,9 +9,9 @@ import {
 } from '../components/animations';
 import TransitionContext from '../context/TransitionContext';
 
-const TransitionComponent = ({ 
-  children, 
-  pageProps, 
+const TransitionComponent = ({
+  children,
+  pageProps,
   logo,
   motionBar,
   vpWidth,
@@ -27,8 +27,9 @@ const TransitionComponent = ({
         onEnter={(node) => {
           toggleCompleted(false);
           console.log('onEnter')
-          let headline = node.querySelector('.textblock-headline'),
-          visualEl = node.querySelectorAll('.visual > *');
+
+          let headline = node.querySelector('h1'),
+            visualEl = node.querySelectorAll('.visual > *');
           if (visualEl.length > 0) {
             animateVisualIn(visualEl);
           }
@@ -45,10 +46,10 @@ const TransitionComponent = ({
             initialMotionBarTop,
             "0",
             headline ? headline.getBoundingClientRect().x : "0",
-            headline ? headline.childNodes[0].clientWidth : "10"
-    )
+            headline ? headline.clientWidth : "10"
+          )
           if (headline !== null) {
-            gsap.fromTo(headline.childNodes[0], {
+            gsap.fromTo(headline, {
               opacity: 0,
               y: 200,
               x: 0,
@@ -100,37 +101,37 @@ const TransitionComponent = ({
           //   .to(node, { xPercent: 100, autoAlpha: 0, duration: 0.2 })
           //   .play();
           let headline = node.querySelector('.textblock-headline'),
-          visual = node.getElementsByClassName('visual');
-        if (visual.length > 0) {
-          animateVisualOut(visual);
-        }
-        gsap.to('.textblock-text, .c-item', {
-          opacity: 0,
-          y: 30,
-          ease: 'Expo.easeIn',
-          duration: 0.3,
-        })
-        // gsap.to(['.is-prev', '.prev-line'], {
-        //   opacity: 0,
-        //   x: 10,
-        // })
-        // gsap.to(['.is-next', '.next-line'], {
-        //   opacity: 0,
-        //   x: -10,
-        // })
-        gsap.to(node, {
-          autoAlpha: 0,
-          duration: 100,
-          delay: .3,
-        })
-        if (headline !== null) {
-          gsap.to(headline.childNodes[0], {
-            y: 200,
-            x: 0,
+            visual = node.getElementsByClassName('visual');
+          if (visual.length > 0) {
+            animateVisualOut(visual);
+          }
+          gsap.to('.textblock-text, .c-item', {
+            opacity: 0,
+            y: 30,
             ease: 'Expo.easeIn',
             duration: 0.3,
-          });
-        }
+          })
+          // gsap.to(['.is-prev', '.prev-line'], {
+          //   opacity: 0,
+          //   x: 10,
+          // })
+          // gsap.to(['.is-next', '.next-line'], {
+          //   opacity: 0,
+          //   x: -10,
+          // })
+          gsap.to(node, {
+            autoAlpha: 0,
+            duration: 100,
+            delay: .3,
+          })
+          if (headline !== null) {
+            gsap.to(headline.childNodes[0], {
+              y: 200,
+              x: 0,
+              ease: 'Expo.easeIn',
+              duration: 0.3,
+            });
+          }
 
 
 

@@ -41,6 +41,7 @@ const Layout = ({ children, pageProps }) => {
         headlineX = 200;
         headlineW = 400;
       }
+      animatePosToRef(logoEl.current, headlineX)
       animateMotionBar(
         motionBar.current,
         document.querySelector('main'),
