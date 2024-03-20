@@ -76,7 +76,7 @@ export default function App({ Component, pageProps }) {
           content: {
             _uid: '63ff96fd-4ada-41ec-b2bb-9627b9a74399',
             component: 'config',
-            header_menu: [ [Object], [Object], [Object], [Object] ]
+            header_menu: [ ['Object'], ['Object'], ['Object'], ['Object'] ]
           },
         }
       }

@@ -99,13 +99,12 @@ const Config = ({ configContent, pageProps }) => {
         <ul ref={menu}>
           {configContent.header_menu.map((nestedBlok, index) => (
             <Fragment key={"mainnav" + nestedBlok._uid}>
-              {/* link */}
-              {/* theoretisch kann ich via classe auch hier schon die active setzen und in menulink auf router verzichten */}
               <StoryblokComponent
                 blok={nestedBlok}
                 key={"mainnav" + nestedBlok._uid}
                 subKey={"mainnav" + nestedBlok._uid}
                 number={index ? index + 1 : 1}
+                activePage={pageProps.story.full_slug}
               />
             </Fragment>
           ))}

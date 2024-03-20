@@ -1,20 +1,16 @@
 import { storyblokEditable } from "@storyblok/react";
 import Link from "next/link";
-import { useRouter } from 'next/router';
 
-const MenuLink = ({ blok, number, className, subKey }) => {
-
-    const router = useRouter();
-    const currentRoute = router.asPath;
+const MenuLink = ({ blok, number, className, subKey, activePage }) => {
 
     return (
         <li 
-        className={currentRoute === "/" + blok.link.cached_url ? "nav-item is-active " + className : "nav-item not-active " + className}
+        className={activePage === blok.link.cached_url ? "nav-item is-active " + className : "nav-item not-active " + className}
         key={"li" + subKey}
         >
             <Link
                 className={
-                    currentRoute === "/" + blok.link.cached_url ? "is-active" : "not-active"}
+                    activePage === blok.link.cached_url ? "is-active" : "not-active"}
                 href={blok.link.cached_url}
                 key={"link" + subKey}
                 {...storyblokEditable(blok)}

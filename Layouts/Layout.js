@@ -42,7 +42,7 @@ const Layout = ({ children, pageProps }) => {
         headlineX = 200;
         headlineW = 400;
       }
-      
+
       animatePosToRef(logoEl.current, headlineX)
       animateMotionBar(
         motionBar.current,
@@ -94,30 +94,32 @@ const Layout = ({ children, pageProps }) => {
 
   return (
     <>
-    <Head>
-      <title id="title" key="title">Portfolio und Vita von Johannes Bühl</title>
-      <meta id="description" name="description" content="Portfolio und Website von Johannes Bühl (Teamleitung Konzeption und Projektmanagement)" />
-      <meta name="icon" href="/favicon/favicon.ico" />
-      <link rel="shortcut icon" href="/favicon/favicon.ico" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
-      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
-      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
-      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffcc00" />
-      <meta name="msapplication-TileColor" content="#ffcc00" />
+      <Head>
+        <title id="title" key="title">Portfolio und Vita von Johannes Bühl</title>
+        <meta id="description" name="description" content="Portfolio und Website von Johannes Bühl (Teamleitung Konzeption und Projektmanagement)" />
+        <meta name="icon" href="/favicon/favicon.ico" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+        <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffcc00" />
+        <meta name="msapplication-TileColor" content="#ffcc00" />
 
-    </Head>
-      <Logo ref={logoEl}
-      // menuItems={data.allStoryblokEntry.nodes} 
+      </Head>
+      <Logo
+        ref={logoEl}
+        menuItems={pageProps.config.content.header_menu}
+        activePage={pageProps.story.full_slug}
       />
       <Config configContent={pageProps.config.content} pageProps={pageProps} />
       <TransitionProvider>
-        <TransitionComponent 
-        pageProps={pageProps} 
-        logo={logoEl.current} 
-        motionBar={motionBar.current}
-        vpWidth={vpWidth.current}
-        vpHeight={vpHeight.current}
-        initialMotionBarTop={initialMotionBarTop.current}
+        <TransitionComponent
+          pageProps={pageProps}
+          logo={logoEl.current}
+          motionBar={motionBar.current}
+          vpWidth={vpWidth.current}
+          vpHeight={vpHeight.current}
+          initialMotionBarTop={initialMotionBarTop.current}
         >
           <main>
             {children}
