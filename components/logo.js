@@ -3,11 +3,11 @@ import { forwardRef } from 'react';
 import Link from "next/link";
 
 const Logo = forwardRef(function Logo({ menuItems, activePage }, ref) {
-
+  console.log(menuItems[0].link)
   return (
     <header ref={ref}>
       <div id="logo" className="logo"><Link href="/">JB</Link></div>
-      {menuItems ?
+      {menuItems && menuItems.length > 0 && menuItems[0].link  ?
         <div className="logo__content">
           {menuItems.map((node) => (
             <Link 
