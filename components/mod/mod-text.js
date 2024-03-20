@@ -6,9 +6,9 @@ const Text = ({ blok, children, color }) => {
   const renderedRichText = renderRichText(blok.bodyText);
   const headline = (blok.headline) ? <div className='textblock-headline'><h1 style={{ color: colType }}>{blok.headline}</h1></div> : "false"
   return (
-    <div {...storyblokEditable(blok)} key={blok._uid} className="textblock">
+    <div {...storyblokEditable(blok)} className="textblock">
       {headline}
-      <div className='textblock-text' style={{ color: colType }}>
+      <div className='textblock-text' key={blok._uid} style={{ color: colType }}>
         <div dangerouslySetInnerHTML={{ __html: renderedRichText }} />
         {blok.plainText}
         {children}

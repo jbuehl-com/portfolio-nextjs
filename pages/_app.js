@@ -54,7 +54,7 @@ const components = {
 };
 /** 2. Initialize it as usual */
 storyblokInit({
-  accessToken: process.env.SB_TOKEN,
+  accessToken: process.env.NEXT_PUBLIC_SB_TOKEN,
   apiOptions: {
     region: "eu", 
   },

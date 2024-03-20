@@ -12,6 +12,7 @@ import {
   animateVisualOut,
 } from '../components/animations';
 import { cPropertyVH } from '../helpers/cproperty-vh'
+import Head from 'next/head'
 
 const timeout = 500
 
@@ -93,6 +94,18 @@ const Layout = ({ children, pageProps }) => {
 
   return (
     <>
+    <Head>
+      <title id="title" key="title">Portfolio und Vita von Johannes Bühl</title>
+      <meta id="description" name="description" content="Portfolio und Website von Johannes Bühl (Teamleitung Konzeption und Projektmanagement)" />
+      <meta name="icon" href="/favicon/favicon.ico" />
+      <link rel="shortcut icon" href="/favicon/favicon.ico" />
+      <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png" />
+      <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png" />
+      <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png" />
+      <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#ffcc00" />
+      <meta name="msapplication-TileColor" content="#ffcc00" />
+
+    </Head>
       <Logo ref={logoEl}
       // menuItems={data.allStoryblokEntry.nodes} 
       />
