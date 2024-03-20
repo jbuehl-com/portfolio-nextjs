@@ -54,6 +54,7 @@ header {
         display: none;
         text-decoration: none;
         text-overflow: ellipsis;
+        color: var(--colorType);
 
         @include tablet {
             width: calc(30vw);
