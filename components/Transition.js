@@ -19,35 +19,42 @@ const TransitionComponent = ({
   initialMotionBarTop,
 }) => {
   const { toggleCompleted } = useContext(TransitionContext);
+  const timing = 500;
   return (
     <SwitchTransition>
       <Transition
         key={pageProps.story.full_slug}
-        timeout={500}
+        
+        timeout={timing}
+
         onEnter={(node) => {
           toggleCompleted(false);
           console.log('onEnter')
 
           let headline = node.querySelector('h1'),
-            visualEl = node.querySelectorAll('.visual > *');
+            visualEl = node.querySelectorAll('.visual > *'),
+            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
           if (visualEl.length > 0) {
             animateVisualIn(visualEl);
-          }
-          if (headline !== null) {
-            animatePosToRef(logo, headline.getBoundingClientRect().x)
-          } else {
-            animatePosToRef(logo, '100')
-          }
-          animateMotionBar(
-            motionBar,
-            document.querySelector('main'),
-            vpWidth,
-            vpHeight,
-            initialMotionBarTop,
-            "0",
-            headline ? headline.getBoundingClientRect().x : "0",
-            headline ? headline.clientWidth : "10"
-          )
+          }        
+
+
+
+            if (headline !== null) {
+              animatePosToRef(logo, headline.getBoundingClientRect().x)
+            } else {
+              animatePosToRef(logo, '100')
+            }            
+            animateMotionBar(
+              motionBar,
+              document.querySelector('main'),
+              vpWidth,
+              vpHeight,
+              initialMotionBarTop,
+              "0",
+              headline ? headline.getBoundingClientRect().x : "0",
+              headline ? headline.clientWidth : "10"
+            )
           if (headline !== null) {
             gsap.fromTo(headline, {
               opacity: 0,
@@ -67,7 +74,7 @@ const TransitionComponent = ({
             opacity: 0,
             y: 30,
             delay: 0.2,
-            duration: 1,
+            duration: timing / 1000,
           })
           // gsap.fromTo(['.is-prev', '.prev-line'], {
           //   opacity: 0,
@@ -95,13 +102,11 @@ const TransitionComponent = ({
           //   .play();
         }}
         onExit={(node) => {
-          // gsap
-          //   .timeline({ paused: true })
-          //   .to(node, { scale: 0.8, duration: 0.2 })
-          //   .to(node, { xPercent: 100, autoAlpha: 0, duration: 0.2 })
-          //   .play();
-          let headline = node.querySelector('.textblock-headline'),
-            visual = node.getElementsByClassName('visual');
+          console.log('onExit')
+
+          let headline = node.querySelector('h1'),
+            visual = node.getElementsByClassName('visual'),
+            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
           if (visual.length > 0) {
             animateVisualOut(visual);
           }
@@ -119,22 +124,19 @@ const TransitionComponent = ({
           //   opacity: 0,
           //   x: -10,
           // })
-          gsap.to(node, {
-            autoAlpha: 0,
-            duration: 100,
-            delay: .3,
-          })
+          // gsap.to(node, {
+          //   autoAlpha: 0,
+          //   duration: 100,
+          //   delay: .3,
+          // })
           if (headline !== null) {
-            gsap.to(headline.childNodes[0], {
+            gsap.to(headline, {
               y: 200,
               x: 0,
               ease: 'Expo.easeIn',
-              duration: 0.3,
+              duration: timing / 1000 / 2,
             });
           }
-
-
-
         }}
       >
         {children}

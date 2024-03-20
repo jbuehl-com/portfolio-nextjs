@@ -1,6 +1,5 @@
 import { storyblokEditable, StoryblokComponent } from "@storyblok/react/rsc";
 import { renderRichText } from "@storyblok/react";
-// import './mod-textblock.scss'
 
 const Text = ({ blok, children, color }) => {
   let colType = color ? color.type : '#000';
