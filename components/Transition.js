@@ -31,16 +31,17 @@ const TransitionComponent = ({
           toggleCompleted(false);
           console.log('onEnter')
 
-          let headline = node.querySelector('h1'),
-            visualEl = node.querySelectorAll('.visual > *'),
-            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
+          let headline = node.querySelector('h1')
+          let  visualEl = node.querySelectorAll('.visual > *')
+          let headlineAnimationOffset = null
+
           if (visualEl.length > 0) {
             animateVisualIn(visualEl);
           }        
-
-
-
-            if (headline !== null) {
+          
+          
+          if (headline !== null) {
+              headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
               animatePosToRef(logo, headline.getBoundingClientRect().x)
             } else {
               animatePosToRef(logo, '100')
@@ -58,7 +59,7 @@ const TransitionComponent = ({
           if (headline !== null) {
             gsap.fromTo(headline, {
               opacity: 0,
-              y: 200,
+              y: headlineAnimationOffset,
               x: 0,
             },
               {
@@ -102,8 +103,6 @@ const TransitionComponent = ({
           //   .play();
         }}
         onExit={(node) => {
-          console.log('onExit')
-
           let headline = node.querySelector('h1'),
             visual = node.getElementsByClassName('visual'),
             headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
@@ -112,7 +111,7 @@ const TransitionComponent = ({
           }
           gsap.to('.textblock-text, .c-item', {
             opacity: 0,
-            y: 30,
+            y: headlineAnimationOffset,
             ease: 'Expo.easeIn',
             duration: 0.3,
           })
