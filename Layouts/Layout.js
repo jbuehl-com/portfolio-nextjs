@@ -91,10 +91,10 @@ const Layout = ({ children, pageProps }) => {
 
 
   }, [])
-
-  let mainClasses = pageProps.story.content.type;
+  
+  let mainClasses = pageProps.story.content ? pageProps.story.content.type : '';
   // check if the story contains a component legendContainer. if true, add a class
-  if (pageProps.story.content.type === 'm-default') {
+  if (pageProps.story.content && pageProps.story.content.type === 'm-default') {
     for (let el of pageProps.story.content.right) {
       if (el.component === 'legendContainer') {
         mainClasses += ' has-legend';
