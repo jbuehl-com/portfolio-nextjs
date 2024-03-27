@@ -7,8 +7,8 @@ import deviceMobile from '../../assets/images/dev-375x746.png'
 
 const RefDesktopMobile = ({ blok }) => {
   return (
-    <div {...storyblokEditable(blok)} key={blok._uid} className="visual portfolio">
-      <div className="dev-laptop">
+    <div {...storyblokEditable(blok)} key={'refDesktopMobile' + blok._uid} className="visual portfolio">
+      <div key={'refDesktop' + blok._uid} className="dev-laptop">
         <div className="device">
           <Image src={deviceLaptop} alt="Device Laptop" />
           </div>
@@ -16,7 +16,7 @@ const RefDesktopMobile = ({ blok }) => {
           <MediaElement srcVideo={blok.desktopVideo.filename} srcImage={blok.desktopImage.filename} />
         </div>
       </div>
-      <div className="dev-mobile">
+      <div key={'refMobile' + blok._uid} className="dev-mobile">
         <div className="device">
           {/* ![Mobile](./../images/dev-375x746.png) */}
           <Image src={deviceMobile} alt="Device Mobile" />

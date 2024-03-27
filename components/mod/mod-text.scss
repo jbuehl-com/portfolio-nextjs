@@ -49,7 +49,7 @@
   }
 
   >.textblock-text {
-    height: calc(50% - 110px);
+    height: calc(50% - 30px);
     margin-top: 11px;
     overflow-y: auto;
     background:
@@ -76,6 +76,13 @@
     }
   }
 }
+
+
+main.has-legend > .textblock >.textblock-text {
+  height: calc(50% - 110px);
+}
+
+
 .is-invert {
   .textblock-text {
     background:

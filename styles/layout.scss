@@ -43,7 +43,7 @@ main {
   }
 
   &.m-full {
-    grid-template-columns: 10vw 2fr 20px 1fr 100px;
+    grid-template-columns: 10vw 4fr 20px 20px 100px;
     grid-template-areas: ("spacerLeft header header header header"
         "spacerLeft contentText spacerContent contentVisual nav"
         "spacerLeft contentText spacerContent contentVisual nav"

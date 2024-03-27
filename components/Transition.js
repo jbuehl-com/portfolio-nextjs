@@ -106,8 +106,11 @@ const TransitionComponent = ({
           let headline = node.querySelector('h1'),
             visual = node.getElementsByClassName('visual'),
             headlineAnimationOffset = null;
+
+            if (headline !== null) {
+              headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
+            }
           if (visual.length > 0) {
-            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
             animateVisualOut(visual);
           }
           gsap.to('.textblock-text, .c-item', {
