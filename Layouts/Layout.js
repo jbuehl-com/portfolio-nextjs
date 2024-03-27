@@ -97,7 +97,6 @@ const Layout = ({ children, pageProps }) => {
   if (pageProps.story.content.type === 'm-default') {
     for (let el of pageProps.story.content.right) {
       if (el.component === 'legendContainer') {
-        console.log('legendContainer found');
         mainClasses += ' has-legend';
       }
     }

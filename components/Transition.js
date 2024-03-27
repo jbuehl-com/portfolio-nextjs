@@ -29,7 +29,6 @@ const TransitionComponent = ({
 
         onEnter={(node) => {
           toggleCompleted(false);
-          console.log('onEnter')
 
           let headline = node.querySelector('h1')
           let visualEl = node.querySelectorAll('.visual > *')
