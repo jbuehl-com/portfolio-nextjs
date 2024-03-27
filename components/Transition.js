@@ -24,7 +24,7 @@ const TransitionComponent = ({
     <SwitchTransition>
       <Transition
         key={pageProps.story.full_slug}
-        
+
         timeout={timing}
 
         onEnter={(node) => {
@@ -32,30 +32,30 @@ const TransitionComponent = ({
           console.log('onEnter')
 
           let headline = node.querySelector('h1')
-          let  visualEl = node.querySelectorAll('.visual > *')
+          let visualEl = node.querySelectorAll('.visual > *')
           let headlineAnimationOffset = null
 
           if (visualEl.length > 0) {
             animateVisualIn(visualEl);
-          }        
-          
-          
+          }
+
+
           if (headline !== null) {
-              headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
-              animatePosToRef(logo, headline.getBoundingClientRect().x)
-            } else {
-              animatePosToRef(logo, '100')
-            }            
-            animateMotionBar(
-              motionBar,
-              document.querySelector('main'),
-              vpWidth,
-              vpHeight,
-              initialMotionBarTop,
-              "0",
-              headline ? headline.getBoundingClientRect().x : "0",
-              headline ? headline.clientWidth : "10"
-            )
+            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
+            animatePosToRef(logo, headline.getBoundingClientRect().x)
+          } else {
+            animatePosToRef(logo, '100')
+          }
+          animateMotionBar(
+            motionBar,
+            document.querySelector('main'),
+            vpWidth,
+            vpHeight,
+            initialMotionBarTop,
+            "0",
+            headline ? headline.getBoundingClientRect().x : "0",
+            headline ? headline.clientWidth : "10"
+          )
           if (headline !== null) {
             gsap.fromTo(headline, {
               opacity: 0,
@@ -105,8 +105,9 @@ const TransitionComponent = ({
         onExit={(node) => {
           let headline = node.querySelector('h1'),
             visual = node.getElementsByClassName('visual'),
-            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
+            headlineAnimationOffset = null;
           if (visual.length > 0) {
+            headlineAnimationOffset = vpWidth > 768 ? headline.clientHeight + 30 : headline.clientHeight + vpHeight / 2 - headline.getBoundingClientRect().y;
             animateVisualOut(visual);
           }
           gsap.to('.textblock-text, .c-item', {
