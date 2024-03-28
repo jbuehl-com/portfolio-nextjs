@@ -8,6 +8,8 @@ import { useIsomorphicLayoutEffect } from '../helpers/isomorphicEffect';
 import {
   animateCssVarCols
 } from '../components/animations';
+import Script from 'next/script'
+
 
 export default function Page({ story }) {
   story = useStoryblokState(story);
@@ -36,10 +38,13 @@ export default function Page({ story }) {
   }, [])
 
   return (
+    <>
     <StoryblokComponent
       blok={story.content}
       color={col}
-    />
+      />
+      <Script defer data-domain="jbuehl.com" src="https://plausible.io/js/Script.js"></Script>
+    </>
   );
 }
 
