@@ -43,7 +43,7 @@ export default function Page({ story }) {
       blok={story.content}
       color={col}
       />
-      <Script defer data-domain="website.jbuehl.com" src="https://plausible.io/js/Script.js"></Script>
+      <Script defer data-domain="website.jbuehl.com" src="https://plausible.io/js/script.js"></Script>
     </>
   );
 }
